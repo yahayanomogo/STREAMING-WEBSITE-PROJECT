@@ -1,0 +1,300 @@
+/* Fantastic Dark Theme */
+body {
+    background: radial-gradient(circle at center, #000 0%, #111 50%, #000 100%);
+    color: #fff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: 
+        radial-gradient(circle at 20% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(255, 255, 0, 0.05) 0%, transparent 50%);
+    animation: float 20s ease-in-out infinite;
+    z-index: -2;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-10px) rotate(120deg); }
+    66% { transform: translateY(10px) rotate(240deg); }
+}
+
+.card img {
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+video {
+    max-height: 300px;
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Override for fullscreen video players - don't interfere with Video.js controls */
+#video-container video,
+#player-container video {
+    max-height: none !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+}
+
+/* Ensure Video.js controls are visible */
+.video-js .vjs-control-bar {
+    display: flex !important;
+    opacity: 1 !important;
+}
+
+.video-js:hover .vjs-control-bar {
+    opacity: 1 !important;
+}
+
+.navbar-nav .nav-link {
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #b0b0b0 !important;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #9b59b6 !important;
+    text-shadow: 0 0 10px #9b59b6;
+}
+
+.card {
+    background: #1a1a1a;
+    border: 1px solid rgba(155,89,182,0.5);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3), 0 0 10px rgba(155,89,182,0.2);
+    transition: all 0.3s;
+    color: #fff;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.5), 0 0 30px rgba(155,89,182,0.5), 0 0 40px rgba(0,255,255,0.2);
+    animation: glow 2s infinite;
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 8px 16px rgba(0,0,0,0.5), 0 0 30px rgba(155,89,182,0.5), 0 0 40px rgba(0,255,255,0.2); }
+    50% { box-shadow: 0 8px 16px rgba(0,0,0,0.5), 0 0 50px rgba(155,89,182,0.8), 0 0 60px rgba(0,255,255,0.4); }
+}
+
+.hover-card .card-body {
+    display: none;
+}
+
+.hover-card:hover .card-body {
+    display: block;
+}
+
+.btn-primary {
+    background: #e50914;
+    border: none;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.btn-primary:hover {
+    background: #b20710;
+    box-shadow: 0 0 20px rgba(229,9,20,0.5), 0 0 30px rgba(255,0,255,0.3);
+    transform: scale(1.05);
+}
+
+.tab-content {
+    padding-top: 20px;
+}
+
+.play-btn {
+    font-size: 1.5rem;
+    padding: 15px 30px;
+    border-radius: 50px;
+    background: #e50914;
+    border: 2px solid #e50914;
+    color: #fff;
+    transition: all 0.3s;
+    box-shadow: 0 0 10px rgba(229,9,20,0.3);
+}
+
+.play-btn:hover {
+    background: #b20710;
+    border: 2px solid #b20710;
+    box-shadow: 0 0 30px rgba(229,9,20,0.8);
+    transform: scale(1.1);
+}
+
+.poster-container {
+    position: relative;
+}
+
+.poster-container img {
+    border-radius: 8px;
+}
+
+/* Additional futuristic elements */
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: #fff;
+}
+
+a {
+    color: #9b59b6;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #9b59b6;
+    text-shadow: 0 0 10px rgba(155,89,182,0.5);
+}
+
+/* Rating styles */
+.rating {
+    font-size: 24px;
+}
+
+.star-btn {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: gray;
+    transition: color 0.2s;
+}
+
+.star-btn:hover,
+.star-btn:hover ~ .star-btn {
+    color: gold;
+}
+
+.star-btn:focus {
+    outline: none;
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    height: 60vh;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0f0f0f 100%), url('https://via.placeholder.com/1920x1080/333/000?text=Movie+Background') center/contain no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    z-index: 1;
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(17,17,17,0.7) 30%, rgba(17,17,17,0.3) 60%, transparent 100%);
+    z-index: 1;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 0;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+}
+
+.hero-text {
+    position: absolute;
+    bottom: 80px;
+    left: 20px;
+}
+
+.hero-buttons {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 3;
+    pointer-events: auto;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    word-wrap: break-word;
+    white-space: normal;
+    max-width: 60%;
+}
+
+/* Slider Styles */
+.slider {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.slide {
+    padding: 0 10px;
+}
+
+.slide .card {
+    margin: 0;
+    height: 100%;
+}
+
+.slide .card img {
+    height: 250px;
+    object-fit: cover;
+}
+
+.slide .card-body {
+    padding: 10px;
+}
+
+.slide .card-title {
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+
+.slide p {
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}

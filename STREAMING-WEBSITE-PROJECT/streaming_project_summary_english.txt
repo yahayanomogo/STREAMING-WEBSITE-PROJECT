@@ -1,0 +1,150 @@
+STREAMING WEBSITE PROJECT - TECHNICAL SUMMARY
+
+To create my streaming website project, I used the following tools and technologies:
+
+Tool / Technology	Role in the Project
+HTML5	Web page structure (semantic tags, forms, media)
+CSS3 (Bootstrap, Flexbox, Media Queries)	Styling, responsive layout, UI components (cards, buttons, navigation)
+JavaScript (jQuery, Video.js)	Dynamic behavior (video player, modals, user interactions)
+PHP	Server-side logic: authentication, session management, form processing, CRUD API
+MySQL	Database: storage of users, movies, series, episodes, favorites, ratings, comments
+XAMPP	Local server (Apache, MySQL, PHP) for development
+FontAwesome	Icons for user interface
+Video.js	Custom HTML5 video player for movies and episodes playback
+Bootstrap	CSS framework for responsive grid and prebuilt components
+PHPMailer (optional)	Notification email sending (not implemented in this version)
+FPDF (optional)	PDF generation (not used here)
+Visual Studio Code	Main code editor
+Git	Version control and backups
+Google Fonts	Custom fonts (e.g., Poppins for modern appearance)
+
+MAIN FEATURES
+- Secure authentication (signup/login) with password hashing (password_hash)
+- User management: profile, favorites, viewing history, ratings and comments
+- Movies and series catalog: display by genre, search, details with banners
+- Integrated video player to watch content (movies and episodes)
+- Admin panel: add/edit/delete movies and series, user management
+- Favorites system, ratings (stars), comments on content
+- Automatic viewing history
+- Responsive design for mobile and desktop
+- Server-side data validation with regular expressions
+- File upload (posters, banners, videos) with security
+
+MAIN SITE PAGES
+
+I. INDEX.PHP (Homepage)
+Role: Main entry page, presents the site and directs to key sections.
+Typical content:
+- Fixed header with navigation (Movies, Series, Search, FR/RU Languages, Login/Admin)
+- Hero section with banner and site presentation
+- Grid of popular or recent movies
+- Footer with credits
+
+II. MOVIES.PHP (Movies)
+Role: Movie list with genre filters.
+Content:
+- Grid of movie cards (poster, title, year, genre)
+- Pagination and search
+- Links to movie details
+
+III. SERIES.PHP (Series)
+Role: Series list similar to movies.
+Content:
+- Grid of series cards
+- Pagination and search
+
+IV. MOVIE_DETAIL.PHP (Movie Details)
+Role: Detailed movie page with player and interactions.
+Content:
+- Image banner (without overlaid text)
+- Poster, title, description, genre, year, duration, director, age rating
+- Video player (if logged in)
+- Rating system (stars), comments, add to favorites
+- Comments section
+
+V. SERIES_DETAIL.PHP (Series Details)
+Role: Similar to movie_detail.php for series.
+Content:
+- Image banner
+- Poster, title, description, age rating
+- List of episodes by season with play buttons
+- Ratings, comments, favorites
+
+VI. MA_LISTE.PHP (My List / Favorites)
+Role: Display user's favorite content.
+Content:
+- List of movies and series added to favorites
+- Ability to remove
+
+VII. HISTORY.PHP (History)
+Role: Viewing history.
+Content:
+- List of recently watched content
+
+VIII. LOGIN_USER.PHP / REGISTER.PHP (Login/Registration)
+Role: User authentication.
+Content:
+- Secure forms with validation
+
+IX. ADMIN/LOGIN.PHP (Admin Login)
+Role: Access to admin panel.
+
+X. ADMIN/DASHBOARD.PHP (Admin Dashboard)
+Role: Content management.
+Content:
+- Forms to add movies/series with file uploads
+- User management, content management
+
+XI. ADMIN/MANAGE_MOVIES.PHP / MANAGE_SERIES.PHP
+Role: Content editing/deletion.
+
+XII. ADMIN/EDIT_MOVIE.PHP / EDIT_SERIES.PHP
+Role: Individual editing.
+
+AUTHENTICATION AND USER MANAGEMENT
+
+I. REGISTRATION (REGISTER.PHP)
+- Form: username, email, password
+- Server-side validation, password hashing
+- Database insertion (users table)
+
+II. LOGIN (LOGIN_USER.PHP)
+- Email/password verification with password_verify()
+- Session creation ($_SESSION['user'])
+- Redirect to index.php
+
+III. USER PROFILE
+- Display information, ability to modify (not fully implemented)
+
+IV. FAVORITES, RATINGS, COMMENTS
+- Add/remove favorites via AJAX or POST
+- Rating system (1-5 stars) stored in database
+- Comments with moderation (not implemented)
+
+V. HISTORY
+- Automatic recording during playback (watch_history table)
+
+ADMIN PANEL
+
+I. DASHBOARD
+- Add movies/series with poster, banner, video uploads
+- Fields: title, description (FR/RU), genre, year, duration, director, age rating
+
+II. CONTENT MANAGEMENT
+- List of movies/series with edit/delete
+- Secure file uploads (images/videos)
+
+III. USER MANAGEMENT
+- List of users, roles (admin/user)
+
+DATABASE
+
+Main tables:
+- users : id, username, password, role, email, created_at
+- movies : id, title, title_ru, description, description_ru, genre, release_year, duration, director, age_rating, poster_path, banner_image, video_path, created_at
+- series : id, title, title_ru, description, description_ru, genre, release_year, age_rating, poster_path, banner_image, created_at
+- episodes : id, series_id, title, title_ru, episode_number, season_number, video_path, created_at
+- favorites : id, user_id, content_type, content_id, added_at
+- ratings : id, user_id, content_type, content_id, rating, rated_at
+- comments : id, user_id, content_type, content_id, comment, created_at
+- watch_history : id, user_id, content_type, content_id, watched_at

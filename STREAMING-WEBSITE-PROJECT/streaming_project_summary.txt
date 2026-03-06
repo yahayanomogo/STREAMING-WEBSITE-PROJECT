@@ -1,0 +1,301 @@
+PROJET DE SITE DE STREAMING - RÉSUMÉ TECHNIQUE
+
+Pour créer mon projet de site de streaming, j'ai utilisé les outils et technologies suivants :
+
+Outil / Technologie	Rôle dans le projet
+HTML5	Structure des pages web (balises sémantiques, formulaires, médias)
+CSS3 (Bootstrap, Flexbox, Media Queries)	Stylisation, mise en page responsive, composants UI (cartes, boutons, navigation)
+JavaScript (jQuery, Video.js)	Comportement dynamique (lecteur vidéo, modales, interactions utilisateur)
+PHP	Logique serveur : authentification, gestion des sessions, traitement des formulaires, API CRUD
+MySQL	Base de données : stockage des utilisateurs, films, séries, épisodes, favoris, notes, commentaires
+XAMPP	Serveur local (Apache, MySQL, PHP) pour le développement
+FontAwesome	Icônes pour l'interface utilisateur
+Video.js	Lecteur vidéo HTML5 personnalisé pour la lecture des films et épisodes
+Bootstrap	Framework CSS pour la grille responsive et composants préconçus
+PHPMailer (optionnel)	Envoi d'emails de notification (non implémenté dans cette version)
+FPDF (optionnel)	Génération de PDF (non utilisé ici)
+Visual Studio Code	Éditeur de code principal
+Git	Contrôle de version et sauvegardes
+Google Fonts	Polices personnalisées (ex: Poppins pour une apparence moderne)
+
+FONCTIONS PRINCIPALES
+- Authentification sécurisée (inscription/connexion) avec hashage des mots de passe (password_hash)
+- Gestion des utilisateurs : profil, favoris, historique de visionnage, notes et commentaires
+- Catalogue de films et séries : affichage par genres, recherche, détails avec bannières
+- Lecteur vidéo intégré pour regarder les contenus (films et épisodes)
+- Panel d'administration : ajout/édition/suppression de films et séries, gestion des utilisateurs
+- Système de favoris, notes (étoiles), commentaires sur les contenus
+- Historique de visionnage automatique
+- Design responsive pour mobiles et desktop
+- Validation des données côté serveur avec expressions régulières
+- Upload de fichiers (posters, bannières, vidéos) avec sécurité
+
+PAGES PRINCIPALES DU SITE
+
+I. INDEX.PHP (Page d'accueil)
+Rôle : Page d'entrée principale, présente le site et dirige vers les sections clés.
+Contenu typique :
+- Header fixe avec navigation (Films, Séries, Recherche, Langues FR/RU, Connexion/Admin)
+- Section héros avec bannière et présentation du site
+- Grille de films populaires ou récents
+- Pied de page avec crédits
+
+II. MOVIES.PHP (Films)
+Rôle : Liste des films avec filtres par genre.
+Contenu :
+- Grille de cartes de films (poster, titre, année, genre)
+- Pagination et recherche
+- Liens vers détails des films
+
+III. SERIES.PHP (Séries)
+Rôle : Liste des séries similaires aux films.
+Contenu :
+- Grille de cartes de séries
+- Pagination et recherche
+
+IV. MOVIE_DETAIL.PHP (Détails Film)
+Rôle : Page détaillée d'un film avec lecteur et interactions.
+Contenu :
+- Bannière d'image (sans texte superposé)
+- Poster, titre, description, genre, année, durée, réalisateur, âge
+- Lecteur vidéo (si connecté)
+- Système de notes (étoiles), commentaires, ajout aux favoris
+- Section commentaires
+
+V. SERIES_DETAIL.PHP (Détails Série)
+Rôle : Similaire à movie_detail.php pour les séries.
+Contenu :
+- Bannière d'image
+- Poster, titre, description, âge
+- Liste des épisodes par saison avec boutons de lecture
+- Notes, commentaires, favoris
+
+VI. MA_LISTE.PHP (Ma Liste / Favoris)
+Rôle : Affichage des contenus favoris de l'utilisateur.
+Contenu :
+- Liste des films et séries ajoutés aux favoris
+- Possibilité de retirer
+
+VII. HISTORY.PHP (Historique)
+Rôle : Historique de visionnage.
+Contenu :
+- Liste des contenus regardés récemment
+
+VIII. LOGIN_USER.PHP / REGISTER.PHP (Connexion/Inscription)
+Rôle : Authentification des utilisateurs.
+Contenu :
+- Formulaires sécurisés avec validation
+
+IX. ADMIN/LOGIN.PHP (Connexion Admin)
+Rôle : Accès au panel admin.
+
+X. ADMIN/DASHBOARD.PHP (Dashboard Admin)
+Rôle : Gestion du contenu.
+Contenu :
+- Formulaires pour ajouter films/séries avec upload de fichiers
+- Gestion des utilisateurs, contenus
+
+XI. ADMIN/MANAGE_MOVIES.PHP / MANAGE_SERIES.PHP
+Rôle : Édition/suppression des contenus.
+
+XII. ADMIN/EDIT_MOVIE.PHP / EDIT_SERIES.PHP
+Rôle : Édition individuelle.
+
+AUTHENTIFICATION ET GESTION UTILISATEUR
+
+I. INSCRIPTION (REGISTER.PHP)
+- Formulaire : nom d'utilisateur, email, mot de passe
+- Validation côté serveur, hashage du mot de passe
+- Insertion en base (table users)
+
+II. CONNEXION (LOGIN_USER.PHP)
+- Vérification email/mot de passe avec password_verify()
+- Création de session ($_SESSION['user'])
+- Redirection vers index.php
+
+III. PROFIL UTILISATEUR
+- Affichage des informations, possibilité de modification (non implémentée pleinement)
+
+IV. FAVORIS, NOTES, COMMENTAIRES
+- Ajout/retrait de favoris via AJAX ou POST
+- Système de notes (1-5 étoiles) stocké en base
+- Commentaires avec modération (non implémentée)
+
+V. HISTORIQUE
+- Enregistrement automatique lors de la lecture (table watch_history)
+
+PANEL ADMIN
+
+I. DASHBOARD
+- Ajout de films/séries avec upload de posters, bannières, vidéos
+- Champs : titre, description (FR/RU), genre, année, durée, réalisateur, âge
+
+II. GESTION CONTENUS
+- Liste des films/séries avec édition/suppression
+- Upload sécurisé de fichiers (images/vidéos)
+
+III. GESTION UTILISATEURS
+- Liste des utilisateurs, rôles (admin/user)
+
+BASE DE DONNÉES
+
+Tables principales :
+- users : id, username, password, role, email, created_at
+- movies : id, title, title_ru, description, description_ru, genre, release_year, duration, director, age_rating, poster_path, banner_image, video_path, created_at
+- series : id, title, title_ru, description, description_ru, genre, release_year, age_rating, poster_path, banner_image, created_at
+- episodes : id, series_id, title, title_ru, episode_number, season_number, video_path, created_at
+- favorites : id, user_id, content_type, content_id, added_at
+- ratings : id, user_id, content_type, content_id, rating, rated_at
+- comments : id, user_id, content_type, content_id, comment, created_at
+- watch_history : id, user_id, content_type, content_id, watched_at
+
+MODÈLE UML (Diagramme de Classes Détaillé)
+
+Voici un diagramme de classes UML détaillé en syntaxe PlantUML. Vous pouvez copier ce code dans un outil comme PlantUML Online Editor (https://www.plantuml.com/plantuml/uml/) pour générer le diagramme visuel.
+
+@startuml Streaming Platform UML Class Diagram
+
+class User {
+    - id: int
+    - username: string
+    - password: string (hashed)
+    - email: string
+    - role: enum (user, admin)
+    - created_at: datetime
+    + login(email: string, password: string): boolean
+    + register(username: string, email: string, password: string): boolean
+    + logout(): void
+    + updateProfile(data: array): boolean
+    + deleteAccount(): boolean
+    + addToFavorites(contentType: string, contentId: int): boolean
+    + removeFromFavorites(contentType: string, contentId: int): boolean
+    + rateContent(contentType: string, contentId: int, rating: int): boolean
+    + postComment(contentType: string, contentId: int, comment: string): boolean
+    + watchContent(contentType: string, contentId: int): void
+}
+
+abstract class Content {
+    - id: int
+    - title: string
+    - title_ru: string
+    - description: string
+    - description_ru: string
+    - genre: string
+    - release_year: int
+    - age_rating: int
+    - poster_path: string
+    - banner_image: string
+    - created_at: datetime
+    + getDetails(): array
+    + updateDetails(data: array): boolean
+    + delete(): boolean
+}
+
+class Movie {
+    - duration: int
+    - director: string
+    - video_path: string
+    + watch(): void
+    + getDuration(): int
+}
+
+class Series {
+    + getEpisodes(): array
+    + getSeasons(): array
+}
+
+class Episode {
+    - id: int
+    - series_id: int
+    - title: string
+    - title_ru: string
+    - episode_number: int
+    - season_number: int
+    - video_path: string
+    - created_at: datetime
+    + watch(): void
+    + getNextEpisode(): Episode
+    + getPreviousEpisode(): Episode
+}
+
+class Favorite {
+    - id: int
+    - user_id: int
+    - content_type: enum (movie, series)
+    - content_id: int
+    - added_at: datetime
+    + add(): boolean
+    + remove(): boolean
+}
+
+class Rating {
+    - id: int
+    - user_id: int
+    - content_type: enum (movie, series)
+    - content_id: int
+    - rating: int (1-5)
+    - rated_at: datetime
+    + rate(): boolean
+    + updateRating(newRating: int): boolean
+    + getAverageRating(contentType: string, contentId: int): float
+}
+
+class Comment {
+    - id: int
+    - user_id: int
+    - content_type: enum (movie, series)
+    - content_id: int
+    - comment: text
+    - created_at: datetime
+    + post(): boolean
+    + edit(newComment: string): boolean
+    + delete(): boolean
+}
+
+class WatchHistory {
+    - id: int
+    - user_id: int
+    - content_type: enum (movie, series, episode)
+    - content_id: int
+    - watched_at: datetime
+    + recordWatch(): boolean
+    + getHistory(userId: int): array
+}
+
+class Admin {
+    + addMovie(data: array): boolean
+    + editMovie(movieId: int, data: array): boolean
+    + deleteMovie(movieId: int): boolean
+    + addSeries(data: array): boolean
+    + editSeries(seriesId: int, data: array): boolean
+    + deleteSeries(seriesId: int): boolean
+    + addEpisode(seriesId: int, data: array): boolean
+    + manageUsers(): array
+    + deleteUser(userId: int): boolean
+}
+
+User ||--o{ Favorite : has
+User ||--o{ Rating : gives
+User ||--o{ Comment : posts
+User ||--o{ WatchHistory : creates
+Content <|-- Movie : inherits
+Content <|-- Series : inherits
+Series ||--o{ Episode : contains
+Favorite }o--|| Content : references
+Rating }o--|| Content : references
+Comment }o--|| Content : references
+WatchHistory }o--|| Content : references
+Admin --|> User : inherits
+
+note right of User : Représente les utilisateurs\nnormaux et admins
+note right of Content : Classe abstraite pour\nfilms et séries
+note right of Episode : Épisodes des séries
+note right of Favorite : Système de favoris
+note right of Rating : Système de notation
+note right of Comment : Commentaires utilisateurs
+note right of WatchHistory : Historique de visionnage
+note right of Admin : Fonctions d'administration
+
+@enduml
+
+Ce diagramme PlantUML peut être collé dans n'importe quel éditeur PlantUML pour générer une image du diagramme. Il montre les classes, leurs attributs, méthodes et relations d'héritage et d'association.
